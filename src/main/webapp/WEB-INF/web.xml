@@ -5,13 +5,24 @@
 <web-app>
     <display-name>Archetype Created Web Application</display-name>
 
+    <listener>
+        <listener-class>com.lipeng.common.servlet.SpringContextListener</listener-class>
+    </listener>
+
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:applicationContext.xml</param-value>
     </context-param>
     <!--&lt;!&ndash;web容器启动时就会触发此监听器调用相应的方法创建spring容器&ndash;&gt;-->
+    <!-- ContextLoaderListener只能声明一个
+        SpringContextListener 里面的super.contextInitialized(event); 就相当于执行了下面的listener
+    -->
+<!--    <listener>-->
+<!--        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>-->
+<!--    </listener>-->
+
     <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+      <listener-class>com.lipeng.common.servlet.MyServletContextListener</listener-class>
     </listener>
 
     <filter>
