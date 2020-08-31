@@ -1,7 +1,9 @@
 package com.lipeng.utils;
 
-import java.util.Map;
+import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
+
+import java.util.Map;
 
 public class SpringContextUtils {
 
@@ -17,7 +19,7 @@ public class SpringContextUtils {
         return applicationContext;
     }
 
-    public static void setApplicationContext(ApplicationContext applicationContext) {
+    public static void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         SpringContextUtils.applicationContext = applicationContext;
     }
 

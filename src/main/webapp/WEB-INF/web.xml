@@ -5,33 +5,51 @@
 <web-app>
     <display-name>Archetype Created Web Application</display-name>
 
-    <listener>
-        <listener-class>com.lipeng.common.servlet.SpringContextListener</listener-class>
-    </listener>
-
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:applicationContext.xml</param-value>
     </context-param>
-    <!--&lt;!&ndash;web容器启动时就会触发此监听器调用相应的方法创建spring容器&ndash;&gt;-->
-    <!-- ContextLoaderListener只能声明一个
-        SpringContextListener 里面的super.contextInitialized(event); 就相当于执行了下面的listener
-    -->
-<!--    <listener>-->
-<!--        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>-->
-<!--    </listener>-->
 
     <listener>
-      <listener-class>com.lipeng.common.servlet.MyServletContextListener</listener-class>
+        <listener-class>com.lipeng.common.listener.WebContextLoaderListener</listener-class>
     </listener>
+
+    <listener>
+        <listener-class>com.lipeng.common.listener.EhCacheLoaderListener</listener-class>
+    </listener>
+
+    <listener>
+        <listener-class>com.lipeng.common.listener.TimerStarterListener</listener-class>
+    </listener>
+
+    <listener>
+        <listener-class>com.lipeng.common.listener.RequestListener</listener-class>
+    </listener>
+
+    <listener>
+        <listener-class>com.lipeng.common.listener.SessionListener</listener-class>
+    </listener>
+
+    <!-- 单位分钟 -->
+    <session-config>
+        <session-timeout>1</session-timeout>
+    </session-config>
+
+    <!--&lt;!&ndash;web容器启动时就会触发此监听器调用相应的方法创建spring容器&ndash;&gt;-->
+    <!--    <listener>-->
+    <!--        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>-->
+    <!--    </listener>-->
 
     <filter>
         <filter-name>encodingFilter</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
-        <async-supported>true</async-supported>
         <init-param>
             <param-name>encoding</param-name>
             <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
         </init-param>
     </filter>
 
@@ -49,7 +67,6 @@
             <param-value>classpath:spring-mvc.xml</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
-        <async-supported>true</async-supported>
     </servlet>
     <servlet-mapping>
         <servlet-name>SpringMVC</servlet-name>
