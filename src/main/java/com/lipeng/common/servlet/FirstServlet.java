@@ -27,6 +27,11 @@ public class FirstServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        // 比如http://127.0.0.1:8080/myWeb/firstServlet/a/b
+        // 匹配web.xml里面的servlet /firstServlet
+        log.info("getServletPath:{}", req.getServletPath());
+        // 如果匹配到web.xml里面servlet path就是访问的url减去servlepath = /a/b
+        log.info("getPathInfo:{}", req.getPathInfo());
         String domain = req.getServerName();
         log.info("domain:{}", domain);
         ServletContext servletContext = this.getServletContext();

@@ -80,7 +80,7 @@
 
     <servlet-mapping>
         <servlet-name>firstServlet</servlet-name>
-        <url-pattern>/firstServlet</url-pattern>
+        <url-pattern>/firstServlet/*</url-pattern>
     </servlet-mapping>
 
     <welcome-file-list>
