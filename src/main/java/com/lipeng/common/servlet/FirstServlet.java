@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
 public class FirstServlet extends HttpServlet {
 
     private static final long serialVersionUID = 9219374599787287476L;
-    private static Logger log = LoggerFactory.getLogger(FirstServlet.class);
+    private static final Logger log = LoggerFactory.getLogger(FirstServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
