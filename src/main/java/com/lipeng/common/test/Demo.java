@@ -1,6 +1,7 @@
 package com.lipeng.common.test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -10,6 +11,10 @@ import java.util.List;
 public class Demo {
 
     public static void main(String[] args) {
+        subList();
+    }
+
+    public static void days() {
         List<Integer> days = new ArrayList<>();
         int count = 0;
         for (int i = 1; i < 100; i++) {
@@ -22,6 +27,16 @@ public class Demo {
             }
         }
         System.out.println(days);
+    }
+
+    public static void subList() {
+        List<String> list = new ArrayList<>(Arrays.asList("1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24".split(",")));
+        int pageSize = 10;
+        int curPage = 2;
+        int start = (curPage - 1) * pageSize;
+        int end = Math.min((start + pageSize), list.size());
+        System.out.println(list.subList(start, end));
+        System.out.println(list.subList(0, 1));
     }
 
 }
