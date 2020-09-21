@@ -30,8 +30,8 @@ public class RequestListener implements ServletRequestListener {
         log.info("getRequestURL:{}", request.getRequestURL().toString());
         // 如果tomcat没有设置-Dfile.encoding=UTF-8
         // 那么这里获取的会乱码  可以在前段encode在后端decode
+        String decode = "";
         if (StringUtils.isNotBlank(request.getQueryString())) {
-            String decode = "";
             try {
                 decode = URLDecoder.decode(request.getQueryString(), StandardCharsets.UTF_8.name());
             } catch (UnsupportedEncodingException e) {
@@ -40,6 +40,9 @@ public class RequestListener implements ServletRequestListener {
             log.info("getQueryString:{}", decode);
         }
         log.info("getMethod:{}", request.getMethod());
+        if ("GET".equals(request.getMethod())) {
+            log.info("full request url:{}", request.getRequestURL().toString() + "?" + decode);
+        }
     }
 
 }
