@@ -11,7 +11,9 @@ import java.util.List;
 public class Demo {
 
     public static void main(String[] args) {
+        days();
         subList();
+        subString();
     }
 
     public static void days() {
@@ -37,6 +39,14 @@ public class Demo {
         int end = Math.min((start + pageSize), list.size());
         System.out.println(list.subList(start, end));
         System.out.println(list.subList(0, 1));
+    }
+
+    public static void subString() {
+        String temp = "abcdefg";
+        System.out.println(temp.substring(1)); //bcdefg
+        System.out.println(temp.substring(1, 3)); // bc
+        System.out.println(temp.subSequence(1, 3).toString()); //bc
+        System.out.println(temp.substring(1, temp.length() - 2)); //bcde
     }
 
 }
