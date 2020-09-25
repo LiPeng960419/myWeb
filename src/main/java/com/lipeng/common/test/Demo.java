@@ -11,9 +11,33 @@ import java.util.List;
 public class Demo {
 
     public static void main(String[] args) {
+        test();
         days();
         subList();
         subString();
+    }
+
+    public static void test() {
+        List<Integer> oldList = new ArrayList<Integer>(Arrays.asList(1, 3, 5, 6, 7));
+        List<Integer> newList = new ArrayList<Integer>(Arrays.asList(1, 2, 4, 6, 8));
+
+        List<Integer> add = new ArrayList<>();
+        List<Integer> del = new ArrayList<>();
+
+        for (Integer temp : oldList) {
+            if (!newList.contains(temp)) {
+                del.add(temp);
+            }
+        }
+
+        for (Integer temp : newList) {
+            if (!oldList.contains(temp)) {
+                add.add(temp);
+            }
+        }
+
+        System.out.println(add); // 2 4 8
+        System.out.println(del); // 3 5 7
     }
 
     public static void days() {
