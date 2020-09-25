@@ -1,6 +1,7 @@
 package com.lipeng.common.test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -10,7 +11,8 @@ import java.util.List;
 public class Demo {
 
     public static void main(String[] args) {
-        List<Integer> days = new ArrayList<>();
+        test();
+  /*      List<Integer> days = new ArrayList<>();
         int count = 0;
         for (int i = 1; i < 100; i++) {
             if ((i % 7) % 6 == 0 || (i % 7) % 7 == 0) {
@@ -21,7 +23,30 @@ public class Demo {
                 count = 0;
             }
         }
-        System.out.println(days);
+        System.out.println(days);*/
+    }
+
+    public static void test() {
+        List<Integer> oldList = new ArrayList<Integer>(Arrays.asList(1, 3, 5, 6, 7));
+        List<Integer> newList = new ArrayList<Integer>(Arrays.asList(1, 2, 4, 6, 8));
+
+        List<Integer> add = new ArrayList<>();
+        List<Integer> del = new ArrayList<>();
+
+        for (Integer temp : oldList) {
+            if (!newList.contains(temp)) {
+                del.add(temp);
+            }
+        }
+
+        for (Integer temp : newList) {
+            if (!oldList.contains(temp)) {
+                add.add(temp);
+            }
+        }
+
+        System.out.println(add); // 2 4 8
+        System.out.println(del); // 3 5 7
     }
 
 }
