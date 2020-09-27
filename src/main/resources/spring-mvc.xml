@@ -59,4 +59,11 @@
         <property name="resolveLazily" value="true"/>
     </bean>
 
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.lipeng.common.filter.RequestFilter"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
 </beans>
