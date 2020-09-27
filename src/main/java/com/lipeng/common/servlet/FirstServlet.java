@@ -22,6 +22,7 @@ public class FirstServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        req.getParameter("username");
         // 比如http://127.0.0.1:8080/myWeb/firstServlet/a/b
         // 匹配web.xml里面的servlet /firstServlet
         log.info("getServletPath:{}", req.getServletPath());
