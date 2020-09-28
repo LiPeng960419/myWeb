@@ -1,4 +1,4 @@
-package com.lipeng.common.filter;
+package com.lipeng.common.interceptor;
 
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
  * @Author: lipeng 910138
  * @Date: 2020/9/28 1:18
  */
-public class RequestFilter implements HandlerInterceptor {
+public class RequestInterceptor implements HandlerInterceptor {
 
 
     @Override

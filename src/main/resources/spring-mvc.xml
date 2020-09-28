@@ -62,7 +62,7 @@
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
-            <bean class="com.lipeng.common.filter.RequestFilter"/>
+            <bean class="com.lipeng.common.interceptor.RequestInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
 
