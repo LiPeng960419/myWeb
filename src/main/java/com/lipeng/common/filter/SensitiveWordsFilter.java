@@ -1,13 +1,9 @@
 package com.lipeng.common.filter;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -15,12 +11,10 @@ import java.util.Set;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 
 /**
@@ -34,21 +28,7 @@ public class SensitiveWordsFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) {
-        ServletContext servletContext = filterConfig.getServletContext();
-        String filePath = servletContext.getRealPath("/WEB-INF/classes/sensitivewords.txt");
-        BufferedReader bufferedReader = null;
-        try {
-            bufferedReader = new BufferedReader(
-                    new InputStreamReader(new FileInputStream(filePath), StandardCharsets.UTF_8));
-            String line = null;
-            while ((line = bufferedReader.readLine()) != null) {
-                set.add(line);
-            }
-        } catch (Exception e) {
-            log.error("SensitiveWordsFilter init error", e);
-        } finally {
-            IOUtils.closeQuietly(bufferedReader);
-        }
+        SenstiveWordsUtils.init(filterConfig, set);
     }
 
     @Override
