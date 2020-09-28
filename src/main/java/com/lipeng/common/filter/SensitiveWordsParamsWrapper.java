@@ -11,12 +11,12 @@ import javax.servlet.http.HttpServletRequestWrapper;
  * @Author: lipeng 910138
  * @Date: 2020/9/28 10:07
  */
-public class SensitiveWordsWrapper extends HttpServletRequestWrapper {
+public class SensitiveWordsParamsWrapper extends HttpServletRequestWrapper {
 
     // 用于存储请求参数
     private Map<String, String[]> params = new HashMap<String, String[]>();
 
-    public SensitiveWordsWrapper(HttpServletRequest request) {
+    public SensitiveWordsParamsWrapper(HttpServletRequest request) {
         super(request);
     }
 

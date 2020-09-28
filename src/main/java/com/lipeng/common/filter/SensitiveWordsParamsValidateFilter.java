@@ -34,7 +34,7 @@ public class SensitiveWordsParamsValidateFilter implements Filter {
             throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         Map<String, String[]> map = request.getParameterMap();
-        SensitiveWordsWrapper wrapper = new SensitiveWordsWrapper(req);
+        SensitiveWordsParamsWrapper wrapper = new SensitiveWordsParamsWrapper(req);
         Map<String, String[]> result = new HashMap<>();
         String[] newValues = new String[map.size()];
         map.entrySet().forEach(stringEntry -> {

@@ -79,6 +79,16 @@
         <url-pattern>/binding/get</url-pattern>
     </filter-mapping>
 
+    <filter>
+        <filter-name>SensitiveWordsJsonValidateFilter</filter-name>
+        <filter-class>com.lipeng.common.filter.SensitiveWordsJsonValidateFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>SensitiveWordsJsonValidateFilter</filter-name>
+        <url-pattern>/binding/postJson</url-pattern>
+    </filter-mapping>
+
     <!--&lt;!&ndash; Spring MVC servlet &ndash;&gt;-->
     <servlet>
         <servlet-name>SpringMVC</servlet-name>
