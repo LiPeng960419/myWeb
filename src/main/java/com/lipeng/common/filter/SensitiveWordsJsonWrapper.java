@@ -4,10 +4,10 @@ import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
-import org.apache.commons.io.IOUtils;
 
 /**
  * @Author: lipeng 910138
@@ -19,7 +19,7 @@ public class SensitiveWordsJsonWrapper extends HttpServletRequestWrapper {
 
     public SensitiveWordsJsonWrapper(HttpServletRequest request) throws IOException {
         super(request);
-        body = IOUtils.toByteArray(request.getInputStream());
+        body = SenstiveWordsUtils.getBodyBytes(request.getInputStream());
     }
 
     /**
@@ -53,7 +53,7 @@ public class SensitiveWordsJsonWrapper extends HttpServletRequestWrapper {
 
     @Override
     public BufferedReader getReader() {
-        return new BufferedReader(new InputStreamReader(getInputStream()));
+        return new BufferedReader(new InputStreamReader(getInputStream(), StandardCharsets.UTF_8));
     }
 
 }

@@ -2,6 +2,8 @@ package com.lipeng.common.filter;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.Set;
@@ -9,6 +11,7 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletContext;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.StringUtils;
 
 /**
  * @Author: lipeng 910138
@@ -33,6 +36,26 @@ public class SenstiveWordsUtils {
         } finally {
             IOUtils.closeQuietly(bufferedReader);
         }
+    }
+
+    public static byte[] getBodyBytes(InputStream inputStream) {
+        StringBuilder buffer = new StringBuilder();
+        BufferedReader reader = null;
+        try {
+            reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                buffer.append(line);
+            }
+            if (StringUtils.isNotEmpty(buffer.toString())) {
+                return buffer.toString().getBytes(StandardCharsets.UTF_8);
+            }
+        } catch (IOException e) {
+            log.error("error", e);
+        } finally {
+            IOUtils.closeQuietly(reader);
+        }
+        return null;
     }
 
 }
