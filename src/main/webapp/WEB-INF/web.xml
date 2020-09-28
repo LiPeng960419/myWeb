@@ -65,7 +65,7 @@
 
     <filter-mapping>
         <filter-name>SensitiveWordsFilter</filter-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>/binding/get*</url-pattern>
     </filter-mapping>
 
     <filter>

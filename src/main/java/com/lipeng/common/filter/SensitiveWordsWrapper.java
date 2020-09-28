@@ -17,7 +17,7 @@ public class SensitiveWordsWrapper extends HttpServletRequestWrapper {
     public SensitiveWordsWrapper(HttpServletRequest request) {
         super(request);
         // 把请求参数添加到我们自己的map当中
-        // this.params.putAll(request.getParameterMap());
+        this.params.putAll(request.getParameterMap());
     }
 
     /**
@@ -26,9 +26,14 @@ public class SensitiveWordsWrapper extends HttpServletRequestWrapper {
      * @param extraParams
      */
     public void setParameterMap(Map<String, String[]> extraParams) {
+        this.params.clear();
         for (Map.Entry<String, String[]> entry : extraParams.entrySet()) {
             setParameter(entry.getKey(), entry.getValue());
         }
+    }
+
+    public Map<String, String[]> getParams(){
+        return this.params;
     }
 
     /**

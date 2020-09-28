@@ -29,8 +29,9 @@ public class SensitiveWordsFromValidateFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) {
-        SensitiveWordsWrapper wrapper = new SensitiveWordsWrapper((HttpServletRequest) request);
-        Map<String, String[]> map = wrapper.getParameterMap();
+        HttpServletRequest req = (HttpServletRequest) request;
+        SensitiveWordsWrapper wrapper = new SensitiveWordsWrapper(req);
+        Map<String, String[]> map = wrapper.getParams();
         Map<String, String[]> result = new HashMap<>();
         String[] newValues = new String[map.size()];
         map.entrySet().forEach(stringEntry -> {
