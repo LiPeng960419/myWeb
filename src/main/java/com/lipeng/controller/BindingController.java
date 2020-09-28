@@ -23,7 +23,9 @@ public class BindingController {
     // http://127.0.0.1:8080/myWeb/binding/getRequestParam?username=李鹏
     @RequestMapping(value = "/getRequestParam", method = RequestMethod.GET)
     public void getRequestParam(HttpServletRequest request, @RequestParam String username) {
-        log.info("getParameter username:{}", request.getParameter("username"));
+        //log.info("getParameter username:{}", request.getParameter("username"));
+        //log.info("getParameterValues:{}", request.getParameterValues("username"));
+        //log.info("getParameterMap:{}", request.getParameterMap());
         log.info("getRequestParam username:{}", username);
     }
 
