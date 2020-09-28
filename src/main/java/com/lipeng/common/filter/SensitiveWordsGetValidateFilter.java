@@ -20,7 +20,7 @@ import org.apache.commons.lang.StringUtils;
  * @Date: 2020/9/28 10:09
  */
 @Slf4j
-public class SensitiveWordsFromValidateFilter implements Filter {
+public class SensitiveWordsGetValidateFilter implements Filter {
 
     private final Set<String> set = new HashSet<>();
 

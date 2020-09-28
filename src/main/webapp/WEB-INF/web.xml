@@ -58,6 +58,7 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
+    <!-- SensitiveWordsFilter 和 SensitiveWordsGetValidateFilter 适用于参数名的 不适合对象接收-->
     <filter>
         <filter-name>SensitiveWordsFilter</filter-name>
         <filter-class>com.lipeng.common.filter.SensitiveWordsFilter</filter-class>
@@ -65,17 +66,17 @@
 
     <filter-mapping>
         <filter-name>SensitiveWordsFilter</filter-name>
-        <url-pattern>/binding/get*</url-pattern>
+        <url-pattern>/binding/getRequestParam</url-pattern>
     </filter-mapping>
 
     <filter>
-        <filter-name>SensitiveWordsFromValidateFilter</filter-name>
-        <filter-class>com.lipeng.common.filter.SensitiveWordsFromValidateFilter</filter-class>
+        <filter-name>SensitiveWordsGetValidateFilter</filter-name>
+        <filter-class>com.lipeng.common.filter.SensitiveWordsGetValidateFilter</filter-class>
     </filter>
 
     <filter-mapping>
-        <filter-name>SensitiveWordsFromValidateFilter</filter-name>
-        <url-pattern>/binding/postObject</url-pattern>
+        <filter-name>SensitiveWordsGetValidateFilter</filter-name>
+        <url-pattern>/binding/get</url-pattern>
     </filter-mapping>
 
     <!--&lt;!&ndash; Spring MVC servlet &ndash;&gt;-->
