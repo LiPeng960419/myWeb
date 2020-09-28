@@ -1,5 +1,6 @@
 package com.lipeng.common.filter;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -7,6 +8,7 @@ import java.util.Set;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
@@ -28,10 +30,11 @@ public class SensitiveWordsFromValidateFilter implements Filter {
     }
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) {
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+            throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
+        Map<String, String[]> map = request.getParameterMap();
         SensitiveWordsWrapper wrapper = new SensitiveWordsWrapper(req);
-        Map<String, String[]> map = wrapper.getParams();
         Map<String, String[]> result = new HashMap<>();
         String[] newValues = new String[map.size()];
         map.entrySet().forEach(stringEntry -> {
@@ -50,7 +53,8 @@ public class SensitiveWordsFromValidateFilter implements Filter {
                 result.put(stringEntry.getKey(), newValues);
             }
         });
-        wrapper.setParameterMap(map);
+        wrapper.setParameterMap(result);
+        chain.doFilter(wrapper, response);
     }
 
     @Override
