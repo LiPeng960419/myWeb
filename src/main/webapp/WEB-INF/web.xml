@@ -76,7 +76,7 @@
 
     <filter-mapping>
         <filter-name>SensitiveWordsParamsValidateFilter</filter-name>
-        <url-pattern>/binding/get</url-pattern>
+        <url-pattern>/binding/*</url-pattern>
     </filter-mapping>
 
     <filter>

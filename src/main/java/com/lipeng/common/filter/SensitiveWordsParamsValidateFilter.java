@@ -36,17 +36,17 @@ public class SensitiveWordsParamsValidateFilter implements Filter {
         Map<String, String[]> map = request.getParameterMap();
         SensitiveWordsParamsWrapper wrapper = new SensitiveWordsParamsWrapper(req);
         Map<String, String[]> result = new HashMap<>();
-        String[] newValues = new String[map.size()];
         map.entrySet().forEach(stringEntry -> {
+            String[] newValues = new String[1];
             String[] values = stringEntry.getValue();
             for (int i = 0; i < values.length; i++) {
                 if (StringUtils.isNotEmpty(values[i])) {
                     for (String s : set) {
                         if (values[i].contains(s)) {
-                            newValues[i] = values[i].replace(s, "***");
+                            newValues[0] = values[i].replace(s, "***");
                             break;
                         } else {
-                            newValues[i] = values[i];
+                            newValues[0] = values[i];
                         }
                     }
                 }
