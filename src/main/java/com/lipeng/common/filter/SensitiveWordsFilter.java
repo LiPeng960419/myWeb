@@ -1,5 +1,8 @@
 package com.lipeng.common.filter;
 
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
@@ -29,7 +32,8 @@ public class SensitiveWordsFilter implements Filter {
         String filePath = servletContext.getRealPath("/WEB-INF/classes/sensitivewords.txt");
         BufferedReader bufferedReader = null;
         try {
-            bufferedReader = new BufferedReader(new FileReader(filePath));
+            bufferedReader = new BufferedReader(
+                    new InputStreamReader(new FileInputStream(filePath), StandardCharsets.UTF_8));
             String line = null;
             while ((line = bufferedReader.readLine()) != null) {
                 set.add(line);
@@ -42,23 +46,27 @@ public class SensitiveWordsFilter implements Filter {
     }
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        ServletRequest proxy = (ServletRequest) Proxy.newProxyInstance(request.getClass().getClassLoader(), request.getClass().getInterfaces(), new InvocationHandler() {
-            @Override
-            public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-                if ("getParameter".equals(method.getName())) {
-                    String value = (String) method.invoke(request, args);
-                    if (StringUtils.isNotEmpty(value)) {
-                        for (String s : set) {
-                            if (value.contains(s)) {
-                                return value.replace(s, "***");
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+            throws IOException, ServletException {
+        ServletRequest proxy = (ServletRequest) Proxy
+                .newProxyInstance(request.getClass().getClassLoader(),
+                        request.getClass().getInterfaces(), new InvocationHandler() {
+                            @Override
+                            public Object invoke(Object proxy, Method method, Object[] args)
+                                    throws Throwable {
+                                if ("getParameter".equals(method.getName())) {
+                                    String value = (String) method.invoke(request, args);
+                                    if (StringUtils.isNotEmpty(value)) {
+                                        for (String s : set) {
+                                            if (value.contains(s)) {
+                                                return value.replace(s, "***");
+                                            }
+                                        }
+                                    }
+                                }
+                                return method.invoke(request, args);
                             }
-                        }
-                    }
-                }
-                return method.invoke(request, args);
-            }
-        });
+                        });
         chain.doFilter(proxy, response);
     }
 

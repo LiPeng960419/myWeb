@@ -1,6 +1,7 @@
 package com.lipeng.controller;
 
 import com.lipeng.domain.User;
+import javax.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +22,8 @@ public class BindingController {
 
     // http://127.0.0.1:8080/myWeb/binding/getRequestParam?username=李鹏
     @RequestMapping(value = "/getRequestParam", method = RequestMethod.GET)
-    public void getRequestParam(@RequestParam String username) {
+    public void getRequestParam(HttpServletRequest request, @RequestParam String username) {
+        log.info("getParameter username:{}", request.getParameter("username"));
         log.info("getRequestParam username:{}", username);
     }
 
