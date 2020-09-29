@@ -3,6 +3,7 @@ package com.lipeng.controller;
 import com.alibaba.fastjson.JSON;
 import com.lipeng.domain.User;
 import com.lipeng.service.UserService;
+import com.xiaoju.uemc.tinyid.client.utils.TinyId;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,6 +35,16 @@ public class UserController {
     public String str() {
         List<User> users = userService.listUser();
         return JSON.toJSONString(users);
+    }
+
+    @RequestMapping("/id")
+    public Long id(String bizType) {
+        return TinyId.nextId(bizType);
+    }
+
+    @RequestMapping("/ids")
+    public List<Long> ids(String bizType, Integer batchSize) {
+        return TinyId.nextId(bizType, batchSize);
     }
 
 }
