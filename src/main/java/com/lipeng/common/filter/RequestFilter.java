@@ -39,7 +39,7 @@ public class RequestFilter implements Filter {
             filterChain.doFilter(request, response);
         } finally {
             long cost = System.currentTimeMillis() - start;
-            log.info(String.format("request filter path={}, cost={}, params={}",
+            log.info(String.format("request filter path=%s, cost=%dms, params=%s",
                     request.getServletPath(), cost, params));
         }
     }
