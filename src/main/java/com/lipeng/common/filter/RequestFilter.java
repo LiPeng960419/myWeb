@@ -1,6 +1,7 @@
 package com.lipeng.common.filter;
 
 import java.io.IOException;
+import java.text.MessageFormat;
 import java.util.Map;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -39,7 +40,11 @@ public class RequestFilter implements Filter {
             filterChain.doFilter(request, response);
         } finally {
             long cost = System.currentTimeMillis() - start;
-            log.info(String.format("request filter path=%s, cost=%dms, params=%s",
+            log.info("request filter path={}, cost={}ms, params={}",
+                    new String[]{request.getServletPath(), String.valueOf(cost), params});
+            log.info(String.format("request filter path=%s, cost=%sms, params=%s",
+                    request.getServletPath(), cost, params));
+            log.info(MessageFormat.format("request filter path={0}, cost={1}ms, params={2}",
                     request.getServletPath(), cost, params));
         }
     }
