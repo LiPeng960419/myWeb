@@ -37,8 +37,6 @@ public class RequestFilter implements Filter {
         long start = System.currentTimeMillis();
         try {
             filterChain.doFilter(request, response);
-        } catch (Throwable e) {
-            throw e;
         } finally {
             long cost = System.currentTimeMillis() - start;
             log.info(String.format("request filter path={}, cost={}, params={}",
