@@ -1,5 +1,6 @@
 package com.lipeng.common.filter;
 
+import com.alibaba.fastjson.JSON;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.Map;
@@ -43,7 +44,11 @@ public class RequestFilter implements Filter {
         }
         if (HttpMethod.POST.name().equals(request.getMethod()) && StringUtils.isEmpty(params)) {
             request = new RepeatedlyReadRequestWrapper(request);
-            params = IOUtils.toString(request.getInputStream(), "UTF-8");
+            String body = IOUtils.toString(request.getInputStream(), "UTF-8");
+            paramsMap = JSON.toJavaObject(JSON.parseObject(body), Map.class);
+            for (Map.Entry<String, String[]> entry : paramsMap.entrySet()) {
+                params += entry.getKey() + ":" + entry.getValue() + ";";
+            }
         }
         long start = System.currentTimeMillis();
         try {
