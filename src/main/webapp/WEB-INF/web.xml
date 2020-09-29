@@ -58,6 +58,16 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
+    <filter>
+        <filter-name>RequestFilter</filter-name>
+        <filter-class>com.lipeng.common.filter.RequestFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>RequestFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
     <!-- SensitiveWordsFilter 和 SensitiveWordsParamsValidateFilter 适用于参数名的 不适合对象接收-->
     <filter>
         <filter-name>SensitiveWordsFilter</filter-name>
