@@ -12,6 +12,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.IOUtils;
+import org.springframework.http.HttpMethod;
 import org.springframework.util.StringUtils;
 
 @Slf4j
@@ -27,6 +29,10 @@ public class RequestFilter implements Filter {
             FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+        response.setHeader("Access-Control-Max-Age", "3600");
+        response.setHeader("Access-Control-Allow-Headers", "x-requested-with");
         String params = "";
         Map<String, String[]> paramsMap = request.getParameterMap();
         if (paramsMap != null && !paramsMap.isEmpty()) {
@@ -34,6 +40,10 @@ public class RequestFilter implements Filter {
                 params += entry.getKey() + ":" + StringUtils
                         .arrayToDelimitedString(entry.getValue(), ",") + ";";
             }
+        }
+        if (HttpMethod.POST.name().equals(request.getMethod()) && StringUtils.isEmpty(params)) {
+            request = new RepeatedlyReadRequestWrapper(request);
+            params = IOUtils.toString(request.getInputStream(), "UTF-8");
         }
         long start = System.currentTimeMillis();
         try {
