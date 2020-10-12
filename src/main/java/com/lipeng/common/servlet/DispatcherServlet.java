@@ -31,7 +31,7 @@ public class DispatcherServlet extends HttpServlet {
         <dispatcher>INCLUDE</dispatcher>
         <dispatcher>EXCEPTION</dispatcher>
     </filter-mapping>
-    配置后forward的请求会经过过滤器
+    配置后redirect,forward的请求会经过过滤器
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
