@@ -103,6 +103,20 @@
         <url-pattern>/binding/postJson</url-pattern>
     </filter-mapping>
 
+    <filter>
+        <filter-name>dispatcherFilter</filter-name>
+        <filter-class>com.lipeng.common.filter.DispatcherFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>dispatcherFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>INCLUDE</dispatcher>
+        <dispatcher>EXCEPTION</dispatcher>
+    </filter-mapping>
+
     <!--&lt;!&ndash; Spring MVC servlet &ndash;&gt;-->
     <servlet>
         <servlet-name>SpringMVC</servlet-name>
@@ -126,6 +140,16 @@
     <servlet-mapping>
         <servlet-name>firstServlet</servlet-name>
         <url-pattern>/firstServlet/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>dispatcherServlet</servlet-name>
+        <servlet-class>com.lipeng.common.servlet.DispatcherServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>dispatcherServlet</servlet-name>
+        <url-pattern>/dispatcherServlet</url-pattern>
     </servlet-mapping>
 
     <welcome-file-list>
