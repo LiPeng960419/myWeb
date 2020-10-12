@@ -104,18 +104,28 @@
     </filter-mapping>
 
     <filter>
-        <filter-name>dispatcherFilter</filter-name>
-        <filter-class>com.lipeng.common.filter.DispatcherFilter</filter-class>
+        <filter-name>dispatcherOnceFilter</filter-name>
+        <filter-class>com.lipeng.common.filter.DispatcherOnceFilter</filter-class>
     </filter>
 
     <filter-mapping>
-        <filter-name>dispatcherFilter</filter-name>
+        <filter-name>dispatcherOnceFilter</filter-name>
         <url-pattern>/*</url-pattern>
-        <dispatcher>REQUEST</dispatcher>
-        <dispatcher>FORWARD</dispatcher>
-        <dispatcher>INCLUDE</dispatcher>
-        <dispatcher>EXCEPTION</dispatcher>
     </filter-mapping>
+
+<!--    <filter>-->
+<!--        <filter-name>dispatcherFilter</filter-name>-->
+<!--        <filter-class>com.lipeng.common.filter.DispatcherFilter</filter-class>-->
+<!--    </filter>-->
+
+<!--    <filter-mapping>-->
+<!--        <filter-name>dispatcherFilter</filter-name>-->
+<!--        <url-pattern>/*</url-pattern>-->
+<!--        <dispatcher>REQUEST</dispatcher>-->
+<!--        <dispatcher>FORWARD</dispatcher>-->
+<!--        <dispatcher>INCLUDE</dispatcher>-->
+<!--        <dispatcher>EXCEPTION</dispatcher>-->
+<!--    </filter-mapping>-->
 
     <!--&lt;!&ndash; Spring MVC servlet &ndash;&gt;-->
     <servlet>

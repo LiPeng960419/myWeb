@@ -15,6 +15,7 @@ public class DispatcherServlet extends HttpServlet {
     private static final long serialVersionUID = -1998106927661902186L;
 
     /*
+    针对filter
     到了servlet-2.4中Filter默认下只拦截外部提交的请求，
     forward和include这些内部转发都不会被过滤，
     但是有时候我们需要 forward的时候也用到Filter。
@@ -32,6 +33,9 @@ public class DispatcherServlet extends HttpServlet {
         <dispatcher>EXCEPTION</dispatcher>
     </filter-mapping>
     配置后redirect,forward的请求会经过过滤器
+
+    针对OncePerRequestFilter
+    redirect,forward的请求会经过过滤器
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -44,8 +48,8 @@ public class DispatcherServlet extends HttpServlet {
         // redirect前后页不共用一个request，不能读取转向前通过request.setAttribute()设置的属性值
         // URL种所包含的"/"表示根目录的路径 地址栏发生改变 转向的速度相对要慢
         String contextPath = req.getContextPath();
-        // resp.sendRedirect(contextPath + "/index.jsp");
-        resp.sendRedirect(contextPath + "/firstServlet");
+        resp.sendRedirect(contextPath + "/index.jsp");
+        // resp.sendRedirect(contextPath + "/firstServlet");
     }
 
 }
