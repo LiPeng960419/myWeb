@@ -2,7 +2,6 @@ package com.lipeng.common.aop;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.SqlUtil;
 import com.lipeng.common.mybatis.PageParam;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -34,7 +33,6 @@ public class PageAspect {
         Object rtnObj = pjp.proceed();
         pageParam.setTotalCount((int) page.getTotal());
         pageParam.setTotalPage(page.getPages());
-        SqlUtil.clearLocalPage();
         return rtnObj;
     }
 
