@@ -18,5 +18,30 @@
         from t_user
     </select>
 
+    <select id="userPage" resultMap="UserResultMap">
+        select *
+        from t_user
+        <where>
+            <if test="name!=null and name !='' ">
+                username = #{name}
+            </if>
+            <if test="password!=null and password !='' ">
+                password = #{password}
+            </if>
+        </where>
+    </select>
+
+    <select id="userPageAnno" resultMap="UserResultMap">
+        select *
+        from t_user
+        <where>
+            <if test="name!=null and name !='' ">
+                username = #{name}
+            </if>
+            <if test="password!=null and password !='' ">
+                password = #{password}
+            </if>
+        </where>
+    </select>
 
 </mapper>

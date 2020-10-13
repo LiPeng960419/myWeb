@@ -11,7 +11,7 @@
     <packaging>war</packaging>
 
     <name>myWeb Maven Webapp</name>
-    <url>http://www.coship.com</url>
+    <url>http://www.lipeng.com</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -123,6 +123,12 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aspects</artifactId>
             <version>${spring.version}</version>
         </dependency>
 

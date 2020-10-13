@@ -1,6 +1,7 @@
 package com.lipeng.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.lipeng.domain.QueryUser;
 import com.lipeng.domain.User;
 import com.lipeng.service.UserService;
 import com.xiaoju.uemc.tinyid.client.utils.TinyId;
@@ -35,6 +36,26 @@ public class UserController {
     public String str() {
         List<User> users = userService.listUser();
         return JSON.toJSONString(users);
+    }
+
+    @RequestMapping("/user/page")
+    public Map<String, Object> page(QueryUser queryUser) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        List<User> users = userService.userPage(queryUser);
+        map.put("success", true);
+        map.put("list", users);
+        map.put("total", queryUser.getTotalCount());
+        return map;
+    }
+
+    @RequestMapping("/user/pageAnno")
+    public Map<String, Object> pageAnno(QueryUser queryUser) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        List<User> users = userService.userPageAnno(queryUser);
+        map.put("success", true);
+        map.put("list", users);
+        map.put("total", queryUser.getTotalCount());
+        return map;
     }
 
     @RequestMapping("/id")

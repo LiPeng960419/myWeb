@@ -23,5 +23,11 @@
             <property name="supportMethodsArguments" value="false"/>
             <property name="returnPageInfo" value="none"/>
         </plugin>
+
+<!--        <plugin interceptor="com.lipeng.common.mybatis.PageInterceptor">-->
+<!--            <property name="dataBaseType" value="mysql"/>-->
+<!--            <property name="countSQLSuffix" value="CountSql"/>-->
+<!--        </plugin>-->
     </plugins>
+
 </configuration>
