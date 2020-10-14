@@ -45,6 +45,11 @@ public class UdpManager {
         }
     }
 
+    public static synchronized void stopSocket() {
+        receiveThread.stop();
+        socket.close();
+    }
+
     public synchronized boolean isClosed() {
         return (socket == null) ? true : false;
     }
