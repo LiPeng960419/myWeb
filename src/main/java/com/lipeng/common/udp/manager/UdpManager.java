@@ -3,6 +3,7 @@ package com.lipeng.common.udp.manager;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -14,7 +15,7 @@ public class UdpManager {
 
     private static UdpReceiveThread receiveThread;
 
-    private static final String IP = "127.0.0.1";
+    private static final String IP = "10.9.212.61";
 
     private static final int PORT = 8000;
 
@@ -26,10 +27,13 @@ public class UdpManager {
 
     private static final int RECEIVE_BUFFER_SIZE = 1024 * 100;
 
+    private static InetSocketAddress address;
+
     private UdpManager() {
         if (isClosed()) {
             try {
-                socket = new DatagramSocket();
+                address = new InetSocketAddress(InetAddress.getByName(IP), PORT);
+                socket = new DatagramSocket(address);
                 socket.setReceiveBufferSize(RECEIVE_BUFFER_SIZE);
                 if (receiveThread == null || !receiveThread.isRunning()) {
                     receiveThread = new UdpReceiveThread();
@@ -63,10 +67,9 @@ public class UdpManager {
         log.info("[Send]:" + data);
         DatagramPacket dp = null;
         try {
-            InetAddress address = InetAddress.getByName(IP);
             byte[] buf = (charset == null) ? data.getBytes()
                     : data.getBytes(charset);
-            dp = new DatagramPacket(buf, buf.length, address, PORT);
+            dp = new DatagramPacket(buf, buf.length, address);
             socket.send(dp);
         } catch (Exception e) {
             log.error("sendData error", e);
