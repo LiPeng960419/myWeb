@@ -22,6 +22,7 @@ public class UdpReceiveThread implements Runnable {
     public void start() {
         running = true;
         Thread t = new Thread(this);
+        t.setName("UdpReceiveThread");
         t.start();
     }
 

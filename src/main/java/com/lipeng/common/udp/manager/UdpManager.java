@@ -12,6 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class UdpManager {
 
+    private static UdpReceiveThread receiveThread;
+
     private static final String IP = "127.0.0.1";
 
     private static final int PORT = 8000;
@@ -25,11 +27,17 @@ public class UdpManager {
     private static final int RECEIVE_BUFFER_SIZE = 1024 * 100;
 
     private UdpManager() {
-        try {
-            socket = new DatagramSocket();
-            socket.setReceiveBufferSize(RECEIVE_BUFFER_SIZE);
-        } catch (Exception e) {
-            log.error("init socket error", e);
+        if (isClosed()) {
+            try {
+                socket = new DatagramSocket();
+                socket.setReceiveBufferSize(RECEIVE_BUFFER_SIZE);
+                if (receiveThread == null || !receiveThread.isRunning()) {
+                    receiveThread = new UdpReceiveThread();
+                    receiveThread.start();
+                }
+            } catch (Exception e) {
+                log.error("init socket error", e);
+            }
         }
     }
 
