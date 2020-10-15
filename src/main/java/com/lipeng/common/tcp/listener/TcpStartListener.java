@@ -21,6 +21,7 @@ public class TcpStartListener implements ServletContextListener {
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
         TcpManager.stopSocket();
+        log.info("TcpStartListener stopSocket");
     }
 
 }
