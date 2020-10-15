@@ -116,7 +116,7 @@ public class TcpManager {
             br = new BufferedReader(new InputStreamReader(receiveSocket.getInputStream(), charset));
             StringBuilder builder = new StringBuilder();
             while ((data = br.readLine()) != null) {
-                builder.append(br);
+                builder.append(data);
             }
             data = builder.toString();
             log.info("[Receviced]:" + data);
