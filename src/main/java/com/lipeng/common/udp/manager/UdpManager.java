@@ -86,6 +86,9 @@ public class UdpManager {
     }
 
     public static String receiveData(String charset) {
+        if (socket == null) {
+            return null;
+        }
         DatagramPacket dp = null;
         String data = null;
         try {

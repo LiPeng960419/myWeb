@@ -23,6 +23,10 @@
     </listener>
 
     <listener>
+        <listener-class>com.lipeng.common.tcp.listener.TcpStartListener</listener-class>
+    </listener>
+
+    <listener>
         <listener-class>com.lipeng.common.udp.listener.UdpStartListener</listener-class>
     </listener>
 
