@@ -11,8 +11,14 @@ public class UdpReceiveThread implements Runnable {
 
     private volatile boolean running;
 
+    private Thread t;
+
     public void stop() {
         running = false;
+    }
+
+    public void shutdown() {
+        t.interrupt();
     }
 
     public boolean isRunning() {
@@ -21,14 +27,14 @@ public class UdpReceiveThread implements Runnable {
 
     public void start() {
         running = true;
-        Thread t = new Thread(this);
+        t = new Thread(this);
         t.setName("UdpReceiveThread");
         t.start();
     }
 
     @Override
     public void run() {
-        while (running) {
+        while (!Thread.currentThread().isInterrupted() && running) {
             String data = UdpManager.receiveData();
             if (data != null) {
                 log.info("UdpManager.receiveData:{}", data);

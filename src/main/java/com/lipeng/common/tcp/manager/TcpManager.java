@@ -48,15 +48,20 @@ public class TcpManager {
     }
 
     public static synchronized void stopSocket() {
-        receiveThread.stop();
+        if (receiveThread != null) {
+            receiveThread.stop();
+            receiveThread.shutdown();
+        }
         try {
-            serverSocket.close();
+            if (!isClosed()) {
+                serverSocket.close();
+            }
         } catch (IOException e) {
             log.error("socket close error", e);
         }
     }
 
-    public synchronized boolean isClosed() {
+    public static synchronized boolean isClosed() {
         return (serverSocket == null) ? true : false;
     }
 
