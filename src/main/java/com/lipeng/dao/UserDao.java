@@ -1,5 +1,6 @@
 package com.lipeng.dao;
 
+import com.lipeng.domain.QueryUser;
 import com.lipeng.domain.User;
 import java.util.List;
 
@@ -10,5 +11,9 @@ import java.util.List;
 public interface UserDao {
 
     List<User> listUser();
+
+    List<User> userPage(QueryUser queryUser);
+
+    List<User> userPageAnno(QueryUser queryUser);
 
 }
