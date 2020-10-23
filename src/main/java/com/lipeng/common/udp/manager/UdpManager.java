@@ -56,7 +56,7 @@ public class UdpManager {
     }
 
     public static synchronized boolean isClosed() {
-        return (socket == null) ? true : false;
+        return socket == null;
     }
 
     public synchronized static UdpManager getInstance() {

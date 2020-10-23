@@ -62,7 +62,7 @@ public class TcpManager {
     }
 
     public static synchronized boolean isClosed() {
-        return (serverSocket == null) ? true : false;
+        return serverSocket == null;
     }
 
     public synchronized static TcpManager getInstance() {
