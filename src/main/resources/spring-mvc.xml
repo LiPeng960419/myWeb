@@ -66,4 +66,6 @@
         </mvc:interceptor>
     </mvc:interceptors>
 
+    <bean id="webExceptionHandler" class="com.lipeng.common.resolver.WebExceptionHandler"/>
+
 </beans>
