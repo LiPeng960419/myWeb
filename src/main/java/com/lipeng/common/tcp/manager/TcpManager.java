@@ -8,6 +8,7 @@ import java.io.OutputStream;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 
@@ -20,7 +21,15 @@ public class TcpManager {
 
     private static TcpReceiveThread receiveThread;
 
-    private static final String IP = "10.9.212.61";
+    private static String IP = null;
+
+    static {
+        try {
+            IP = InetAddress.getLocalHost().getHostAddress();
+        } catch (UnknownHostException e) {
+            log.error(e.getMessage(), e);
+        }
+    }
 
     private static final int PORT = 9000;
 
