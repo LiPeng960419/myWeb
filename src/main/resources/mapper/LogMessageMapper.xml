@@ -93,6 +93,12 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from t_log_message
+    where id = #{id,jdbcType=BIGINT}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete
     from t_log_message
@@ -104,74 +110,7 @@
       <include refid="Example_Where_Clause"/>
     </if>
   </delete>
-  <select id="countByExample" parameterType="com.lipeng.domain.LogMessageExample"
-    resultType="java.lang.Long">
-    select count(*) from t_log_message
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause"/>
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update t_log_message
-    <set>
-      <if test="record.id != null">
-        id = #{record.id,jdbcType=BIGINT},
-      </if>
-      <if test="record.type != null">
-        type = #{record.type,jdbcType=TINYINT},
-      </if>
-      <if test="record.content != null">
-        content = #{record.content,jdbcType=VARCHAR},
-      </if>
-      <if test="record.source != null">
-        source = #{record.source,jdbcType=VARCHAR},
-      </if>
-      <if test="record.status != null">
-        status = #{record.status,jdbcType=TINYINT},
-      </if>
-      <if test="record.createUser != null">
-        create_user = #{record.createUser,jdbcType=VARCHAR},
-      </if>
-      <if test="record.createTime != null">
-        create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.updateUser != null">
-        update_user = #{record.updateUser,jdbcType=VARCHAR},
-      </if>
-      <if test="record.updateTime != null">
-        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.version != null">
-        version = #{record.version,jdbcType=INTEGER},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause"/>
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update t_log_message
-    set id = #{record.id,jdbcType=BIGINT},
-    type = #{record.type,jdbcType=TINYINT},
-    content = #{record.content,jdbcType=VARCHAR},
-    source = #{record.source,jdbcType=VARCHAR},
-    status = #{record.status,jdbcType=TINYINT},
-    create_user = #{record.createUser,jdbcType=VARCHAR},
-    create_time = #{record.createTime,jdbcType=TIMESTAMP},
-    update_user = #{record.updateUser,jdbcType=VARCHAR},
-    update_time = #{record.updateTime,jdbcType=TIMESTAMP},
-    version = #{record.version,jdbcType=INTEGER}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause"/>
-    </if>
-  </update>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List"/>
-    from t_log_message
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.lipeng.domain.LogMessage">
+  <insert id="insert" parameterType="com.lipeng.domain.LogMessage">
     insert into t_log_message (id, type, content,
                                source, status, create_user,
                                create_time, update_user, update_time,
@@ -182,7 +121,7 @@
             #{updateTime,jdbcType=TIMESTAMP},
             #{version,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.lipeng.domain.LogMessage">
+  <insert id="insertSelective" parameterType="com.lipeng.domain.LogMessage">
     insert into t_log_message
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -249,6 +188,67 @@
       </if>
     </trim>
   </insert>
+  <select id="countByExample" parameterType="com.lipeng.domain.LogMessageExample"
+    resultType="java.lang.Long">
+    select count(*) from t_log_message
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause"/>
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_log_message
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=TINYINT},
+      </if>
+      <if test="record.content != null">
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.source != null">
+        source = #{record.source,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.createUser != null">
+        create_user = #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateUser != null">
+        update_user = #{record.updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.version != null">
+        version = #{record.version,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause"/>
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_log_message
+    set id = #{record.id,jdbcType=BIGINT},
+    type = #{record.type,jdbcType=TINYINT},
+    content = #{record.content,jdbcType=VARCHAR},
+    source = #{record.source,jdbcType=VARCHAR},
+    status = #{record.status,jdbcType=TINYINT},
+    create_user = #{record.createUser,jdbcType=VARCHAR},
+    create_time = #{record.createTime,jdbcType=TIMESTAMP},
+    update_user = #{record.updateUser,jdbcType=VARCHAR},
+    update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+    version = #{record.version,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause"/>
+    </if>
+  </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.lipeng.domain.LogMessage">
     update t_log_message
     <set>

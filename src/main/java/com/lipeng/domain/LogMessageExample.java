@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 public class LogMessageExample {
+
     protected String orderByClause;
 
     protected boolean distinct;
@@ -65,6 +66,7 @@ public class LogMessageExample {
     }
 
     protected abstract static class GeneratedCriteria {
+
         protected List<Criterion> criteria;
 
         protected GeneratedCriteria() {
@@ -98,7 +100,8 @@ public class LogMessageExample {
             criteria.add(new Criterion(condition, value));
         }
 
-        protected void addCriterion(String condition, Object value1, Object value2, String property) {
+        protected void addCriterion(String condition, Object value1, Object value2,
+                String property) {
             if (value1 == null || value2 == null) {
                 throw new RuntimeException("Between values for " + property + " cannot be null");
             }
@@ -754,6 +757,7 @@ public class LogMessageExample {
     }
 
     public static class Criterion {
+
         private String condition;
 
         private Object value;
@@ -825,7 +829,8 @@ public class LogMessageExample {
             this(condition, value, null);
         }
 
-        protected Criterion(String condition, Object value, Object secondValue, String typeHandler) {
+        protected Criterion(String condition, Object value, Object secondValue,
+                String typeHandler) {
             super();
             this.condition = condition;
             this.value = value;

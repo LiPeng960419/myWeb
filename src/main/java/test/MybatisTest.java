@@ -3,7 +3,6 @@ package test;
 import com.lipeng.dao.LogMessageMapper;
 import com.lipeng.domain.LogMessage;
 import com.lipeng.domain.LogMessageExample;
-import com.lipeng.domain.LogMessageExample.Criteria;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
